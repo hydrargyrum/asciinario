@@ -21,7 +21,7 @@ class Play:
             if match:
                 return method(self, match)
         else:
-            raise Exception("no pattern matched")
+            raise Exception(f"no pattern matched {line!r}")
 
     def do_status_change(self, match):
         if match[1] == "hide":
