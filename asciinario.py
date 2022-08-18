@@ -90,7 +90,7 @@ class Play:
         re.compile("->(>?) (.*)"): do_status_type,
         re.compile(r"key (\^.|\\[nrt]|\\\d{3}|enter|tab)"): do_send_key,
         re.compile("enter"): do_type_enter,
-        re.compile("status (show(?: top|bottom)?|hide)"): do_status_change,
+        re.compile("status (show(?: top| bottom)?|hide)"): do_status_change,
         re.compile(r"w(?:ait)? (\d+(?:\.\d*)?|\d*\.\d+)"): do_wait,
         re.compile(r"set (\w+) = (.*)"): do_set,
         re.compile(r"dialog (.*)"): do_dialog,
