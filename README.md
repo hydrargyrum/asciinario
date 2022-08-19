@@ -9,6 +9,7 @@ While `asciinema` is live recording, `asciinario` adds scripted recording.
 Quality videos include:
 - no typos (regular typing speed is a bonus)
 - explanatory comments
+
 Since there are no (yet?) good tools for editing `asciinema` casts, making a good asciinema cast requires near-perfection, as the slightest typo would require to restart the whole recording, which is tedious.
 
 `asciinario` lets you automate the `asciinema` session.
