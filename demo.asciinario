@@ -1,0 +1,30 @@
+set type_wait = 0.1
+
+status show top
+-> welcome to asciinario!
+wait 2
+-> we are going to type some commands
+wait 2
+status clear
+wait .5
+
+$> python
+wait 1
+$> 1 + 1
+-> well, i hope this result doesn't surprise you
+wait 2
+status clear
+wait .5
+
+$> 42 ** 42
+-> i'm pretty sure you didn't know that one though :)
+wait 2
+status clear
+wait .5
+
+$> quit()
+wait 1
+> bye
+-> have a nice day!
+wait 2
+key enter
