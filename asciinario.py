@@ -32,6 +32,8 @@ class Play:
         elif match[1] == "show bottom":
             self.status_pos = "bottom"
             self.send_screen("hardstatus", "alwayslastline")
+        elif match[1] == "clear":
+            self.send_screen("hstatus", "")
         elif match[1] == "show":
             self.do_status_change([None, f"show {self.status_pos}"])
 
@@ -90,7 +92,7 @@ class Play:
         re.compile("->(>?) (.*)"): do_status_type,
         re.compile(r"key (\^.|\\[nrt]|\\\d{3}|enter|tab)"): do_send_key,
         re.compile("enter"): do_type_enter,
-        re.compile("status (show(?: top| bottom)?|hide)"): do_status_change,
+        re.compile("status (show(?: top| bottom)?|hide|clear)"): do_status_change,
         re.compile(r"w(?:ait)? (\d+(?:\.\d*)?|\d*\.\d+)"): do_wait,
         re.compile(r"set (\w+) = (.*)"): do_set,
         re.compile(r"dialog (.*)"): do_dialog,
