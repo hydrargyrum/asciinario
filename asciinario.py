@@ -90,8 +90,8 @@ class Play:
 
     statements = {
         re.compile(r"(\$?>?)> (.*)"): do_type,
-        re.compile("->(>?) (.*)"): do_status_type,
-        re.compile(r"key (\^.|\\[nrt]|\\\d{3}|enter|tab)"): do_send_key,
+        re.compile("->(>?)(?: (.*))?"): do_status_type,
+        re.compile(r"key (\^.*|\\[nrt]|\\\d{3}.*|enter|tab)"): do_send_key,
         re.compile("enter"): do_type_enter,
         re.compile("status (show(?: top| bottom)?|hide|clear)"): do_status_change,
         re.compile(r"w(?:ait)? (\d+(?:\.\d*)?|\d*\.\d+)"): do_wait,
