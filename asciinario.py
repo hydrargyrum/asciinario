@@ -40,7 +40,7 @@ class Play:
 
     def do_status_type(self, match):
         flags = match[1]
-        message = match[2]
+        message = match[2] or ""
         for n in range(len(message)):
             self.send_screen("hstatus", message[:n + 1])
             if ">" not in flags:
