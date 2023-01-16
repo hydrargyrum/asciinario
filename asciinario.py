@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+from argparse import ArgumentParser
 from pathlib import Path
 import re
 import subprocess
@@ -110,10 +111,18 @@ def play_inscript(text, screen_id):
         player.do(line)
 
 
-instructions = Path(sys.argv[2]).read_text()
+parser = ArgumentParser()
+parser.add_argument("scenario")
+parser.add_argument("output")
+parser.add_argument("--cwd")
+args = parser.parse_args()
+instructions = Path(args.scenario).read_text()
 
 screen_id = str(uuid4())
-recorder_proc = subprocess.Popen(["asciinema", "rec", "-c", f"screen -S {screen_id}", sys.argv[1]])
+cmd = f"screen -S {screen_id}"
+if args.cwd:
+    cmd = f"cd {args.cwd!r}; {cmd}"
+recorder_proc = subprocess.Popen(["asciinema", "rec", "-c", cmd, args.output])
 
 play_inscript(instructions, screen_id)
 subprocess.check_output(["screen", "-S", screen_id, "-X", "quit"])
