@@ -105,7 +105,7 @@ def play_inscript(text, screen_id):
 
     lines = text.strip().split("\n")
     for line in lines:
-        if not line or line.startswith("#"):
+        if not line or line.lstrip().startswith("#"):
             continue
 
         player.do(line)
