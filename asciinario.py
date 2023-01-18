@@ -124,6 +124,19 @@ if args.cwd:
     cmd = f"cd {args.cwd!r}; {cmd}"
 recorder_proc = subprocess.Popen(["asciinema", "rec", "-c", cmd, args.output])
 
+# give some time for screen to start
+for _ in range(10):
+    time.sleep(.5)
+    # echo -n "" is a noop
+    checking = subprocess.run(["screen", "-S", screen_id, "-X", "echo", "-n", ""], encoding="utf8", capture_output=True)
+    if checking.returncode == 0:
+        break
+    assert checking.stdout == "No screen session found.\n"
+    if recorder_proc.poll() is not None:
+        sys.exit("asciinema exited prematurely")
+else:
+    sys.exit(f"screen session {screen_id} could not be found")
+
 play_inscript(instructions, screen_id)
 subprocess.check_output(["screen", "-S", screen_id, "-X", "quit"])
 recorder_proc.wait()
