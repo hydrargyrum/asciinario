@@ -34,7 +34,7 @@ class Play:
             self.status_pos = "bottom"
             self.send_screen("hardstatus", "alwayslastline")
         elif match[1] == "clear":
-            self.send_screen("hstatus", "")
+            self.send_screen("hardstatus", "string", "")
         elif match[1] == "show":
             self.do_status_change([None, f"show {self.status_pos}"])
 
@@ -42,7 +42,7 @@ class Play:
         flags = match[1]
         message = match[2] or ""
         for n in range(len(message)):
-            self.send_screen("hstatus", message[:n + 1])
+            self.send_screen("hardstatus", "string", escape_hstatus(message[:n + 1]))
             if ">" not in flags:
                 time.sleep(self.type_wait)
 
@@ -98,6 +98,10 @@ class Play:
         re.compile(r"set (\w+) = (.*)"): do_set,
         re.compile(r"dialog (.*)"): do_dialog,
     }
+
+
+def escape_hstatus(text):
+    return text.replace("%", "%%")
 
 
 def play_inscript(text, screen_id):
